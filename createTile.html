@@ -8,7 +8,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 
 
-        <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
 
 	<script type="text/javascript" src="lib/bootstrap.min.js"></script>
 
@@ -45,13 +45,23 @@
 	});
 	*/
 	$("#postJob").click(function(){
+
+	     /*var object1 = {"cName":$("#compName").val(),
+		            "compDesc":$("#compDesc").val(),
+			    "compProduct":$("#compProduct").val(),
+			    "skills":$("#skills").val()};
+			object1 = JSON.stringify(object1);*/
+	//	var sample = $("#compName").val();
+
 		var jTable = localStorage.getItem("jobBase") || {};
-		var size = 0;
+		var size = 0; 
 
                 var cName = $("#compName").val();
                 var compDesc = $("#compDesc").val();
                 var compProduct = $("#compProduct").val();
                 var skills = $("#skills").val();
+		var yURL = $("#url").val();
+		var category = $("#category").val();
 		
 		if(Object.size(jTable) > 0){
                 	jTable = JSON.parse(jTable);
@@ -63,10 +73,34 @@
                           	   "compDesc":compDesc,
                           	   "compProduct":compProduct,
                           	   "skills":skills,
+				   "url":yURL,
+				   "category":category
                          	  };
         	jTable = JSON.stringify(jTable);
         	localStorage.setItem("jobBase", jTable);
 		window.location.href = "main.html";
+
+		/*
+		            if (window.XMLHttpRequest) {
+			            // code for IE7+, Firefox, Chrome, Opera, Safari
+			            xmlhttp = new XMLHttpRequest();
+			        } else {
+			            // code for IE6, IE5
+			            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			        }
+		            xmlhttp.onreadystatechange = function() {
+			            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			                    //document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+						console.log(xmlhttp.responseText);
+			                }
+			        }
+			       xmlhttp.open("GET","getuser.php?cName="+cName+"&cDesc="+compDesc+"&cProd="+compProduce+"&skills="+skills,
+			       true);
+
+			 //xmlhttp.open("GET","getuser.php?q="+sample,true);
+		/*var jTable = localStorage.getItem("jobBase") || {};
+		            xmlhttp.send();
+		        }*/
 
 	});
 
@@ -74,7 +108,7 @@
 	    var size = 0, key;
 
    	    for (key in obj) {
-        	if (obj.hasOwnProperty(key)) size++;
+       	if (obj.hasOwnProperty(key)) size++;
     	    }
    	    return size;
 	};
@@ -90,22 +124,32 @@
 
 	
  });
+
+
+
 </script>
 </head>
 <body>
 	<div class="container">
 		<legend>Fill The Job Details</legend>
-		<form>
 			<label>Company Name : </label><br>
 			<input type="text" id="compName"><br>
 			<label>Company Description : </label><br>
 			<input type="textarea" id="compDesc" cols="10"><br>
+			<label>Category : </label><br>
+			<input type="text" id="category"><br>
 			<label>Product :</label><br>
 			<input type="text" id="compProduct"><br>
 			<label>Required Skills : </label><br>
-			<input type="textarea" id="skills" cols="10" style="height:15%!important;"><br><br>
-			<button class="btn btn-large btn-primary" id="postJob">Post Job</button>
-		</form>	
+			<input type="textarea" id="skills" cols="10" style="height:15%!important;"><br>
+			<label>Paste youtube URL here :</label><br>
+			<input type="text" id="url">
+			<!--
+			<input type="file" id="files" name="file" />
+			<button onclick="abortRead();">Cancel read</button><br><br>
+			<div id="progress_bar"><div class="percent">0%</div></div>-->
+			<br><br>
+	    	      <button class="btn btn-large btn-primary" id="postJob">Post Job</button>
 	</div>
 </body>
 </html>

@@ -23,6 +23,7 @@
 <script>
  $(document).ready(function(){
 	$("#logIn").click(function(){
+		localStorage.setItem("isGuest",false);
 		var name = $("#uName").val();
 		var pwd = $("#pwd").val();
 		if(name == "" && pwd == ""){
@@ -39,6 +40,12 @@
 		}
 		
 	});
+
+	$("#guest").click(function(){
+		localStorage.setItem("isGuest", true);
+		window.location.href = "main.html";
+		return false;
+	});
  });
 </script>
 </head>
@@ -53,6 +60,9 @@
 					<label>Password : </label><br>
 					<input type="password" id="pwd"><br><br>
 					<button class="btn btn-primary btn-lg" id="logIn">Log In</button>
+					<br><br>
+					<label>Not Having Account ? <a href="signup.html">Sign Up</a></label><br>
+					<button class="btn btn-info" id="guest">Login as Guest !</button>
 				</form>
 			</div>
 		</div>
